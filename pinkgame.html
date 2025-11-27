@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink Paradise - Game Bertema Perempuan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        :root {
+            --pink: #FFB6C1;
+            --light-pink: #FFD1DC;
+            --purple: #C8A2C8;
+            --light-purple: #E6E6FA;
+            --blue: #ADD8E6;
+            --yellow: #FFFFE0;
+            --mint: #B0E0E6;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--light-pink) 0%, var(--light-purple) 50%, var(--blue) 100%);
+            min-height: 100vh;
+            color: #663399;
+            overflow-x: hidden;
+        }
+
+        /* Floating Elements */
+        .floating {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+            animation: float 15s infinite linear;
+        }
+
+        .floating-heart {
+            color: var(--pink);
+            font-size: 20px;
+        }
+
+        .floating-star {
+            color: var(--yellow);
+            font-size: 18px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--purple);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--pink);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--purple);
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--light-pink);
+            transform: translateY(-3px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--pink);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--purple);
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px rgba(255, 255, 255, 0.7);
+            animation: bounce 2s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #663399;
+            max-width: 700px;
+            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 20px;
+        }
+
+        .play-btn {
+            background: linear-gradient(45deg, var(--pink), var(--purple));
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .play-btn:hover::before {
+            animation: shine 0.5s ease;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: rotate(45deg) translateX(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(45deg) translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Character Gallery */
+        .character-gallery {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--purple);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::before, .section-title::after {
+            content: '✨';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+
+        .section-title::before {
+            left: calc(50% - 120px);
+        }
+
+        .section-title::after {
+            right: calc(50% - 120px);
+        }
+
+        .characters {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .character-card {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .character-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .character-image {
+            height: 200px;
+            background-color: var(--light-pink);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .character-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .character-card:hover .character-image img {
+            transform: scale(1.1);
+        }
+
+        .character-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .character-name {
+            font-size: 1.2rem;
+            color: var(--purple);
+            margin-bottom: 5px;
+        }
+
+        .character-type {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .character-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--yellow);
+            color: var(--purple);
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* Game Info */
+        .game-info {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 60px 20px;
+            margin: 40px 0;
+        }
+
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            color: var(--pink);
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            color: var(--purple);
+            margin-bottom: 15px;
+        }
+
+        .info-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--purple);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--light-pink);
+            transform: translateY(-5px);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--purple);
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.9);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title::before, .section-title::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating floating-heart" style="left: 10%; animation-delay: 0s;"><i class="fas fa-heart"></i></div>
+    <div class="floating floating-star" style="left: 20%; animation-delay: 2s;"><i class="fas fa-star"></i></div>
+    <div class="floating floating-heart" style="left: 30%; animation-delay: 4s;"><i class="fas fa-heart"></i></div>
+    <div class="floating floating-star" style="left: 40%; animation-delay: 6s;"><i class="fas fa-star"></i></div>
+    <div class="floating floating-heart" style="left: 50%; animation-delay: 8s;"><i class="fas fa-heart"></i></div>
+    <div class="floating floating-star" style="left: 60%; animation-delay: 10s;"><i class="fas fa-star"></i></div>
+    <div class="floating floating-heart" style="left: 70%; animation-delay: 12s;"><i class="fas fa-heart"></i></div>
+    <div class="floating floating-star" style="left: 80%; animation-delay: 14s;"><i class="fas fa-star"></i></div>
+    <div class="floating floating-heart" style="left: 90%; animation-delay: 16s;"><i class="fas fa-heart"></i></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                Pink Paradise
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#characters">Karakter</a></li>
+                <li><a href="#game-info">Info Game</a></li>
+                <li><a href="#play">Mainkan</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Selamat Datang di Pink Paradise!</h1>
+        <p>Bergabunglah dalam petualangan ajaib penuh warna, fashion, dan teman-teman baru di dunia fantasi yang ceria!</p>
+        
+        <div class="hero-image">
+            <img src="logog.jpg" alt="Karakter Utama">
+        </div>
+        
+        <a href="#play" class="play-btn">Mainkan Sekarang</a>
+    </section>
+
+    <!-- Character Gallery -->
+    <section class="character-gallery" id="characters">
+        <h2 class="section-title">Temui Karakter Kesayangan</h2>
+        <div class="characters">
+            <div class="character-card">
+                <div class="character-badge">Populer</div>
+                <div class="character-image">
+                    <img src="anim6.jpg" alt="Karakter 1">
+                </div>
+                <div class="character-info">
+                    <h3 class="character-name">Princess Lily</h3>
+                    <p class="character-type">Fashionista</p>
+                </div>
+            </div>
+            
+            <div class="character-card">
+                <div class="character-badge">Baru</div>
+                <div class="character-image">
+                    <img src="bell.jpg" alt="Karakter 2">
+                </div>
+                <div class="character-info">
+                    <h3 class="character-name">Sparkle Bella</h3>
+                    <p class="character-type">Penyihir</p>
+                </div>
+            </div>
+            
+            <div class="character-card">
+                <div class="character-image">
+                    <img src="emma.jpg" alt="Karakter 3">
+                </div>
+                <div class="character-info">
+                    <h3 class="character-name">Cupcake Emma</h3>
+                    <p class="character-type">Koki</p>
+                </div>
+            </div>
+            
+            <div class="character-card">
+                <div class="character-badge">Terbatas</div>
+                <div class="character-image">
+                    <img src="mia.jpg" alt="Karakter 4">
+                </div>
+                <div class="character-info">
+                    <h3 class="character-name">Rainbow Mia</h3>
+                    <p class="character-type">Artis</p>
+                </div>
+            </div>
+            
+            <div class="character-card">
+                <div class="character-image">
+                    <img src="cloe.jpg" alt="Karakter 5">
+                </div>
+                <div class="character-info">
+                    <h3 class="character-name">Kitty Chloe</h3>
+                    <p class="character-type">Pecinta Hewan</p>
+                </div>
+            </div>
+            
+            <div class="character-card">
+                <div class="character-badge">Eksklusif</div>
+                <div class="character-image">
+                    <img src="ava.jpg" alt="Karakter 6">
+                </div>
+                <div class="character-info">
+                    <h3 class="character-name">Starlight Ava</h3>
+                    <p class="character-type">Idol</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Info -->
+    <section class="game-info" id="game-info">
+        <h2 class="section-title">Tentang Pink Paradise</h2>
+        <div class="info-container">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3 class="info-title">Kustomisasi Karakter</h3>
+                <p class="info-text">Buat karakter unik dengan ratusan pilihan fashion, gaya rambut, dan aksesori yang lucu!</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3 class="info-title">Dekorasi Rumah</h3>
+                <p class="info-text">Rancang rumah impianmu dengan furnitur cantik dan dekorasi yang menakjubkan!</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-paw"></i>
+                </div>
+                <h3 class="info-title">Peliharaan Lucu</h3>
+                <p class="info-text">Adopsi dan rawat berbagai hewan peliharaan yang menggemaskan!</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3 class="info-title">Mini Games Seru</h3>
+                    <p class="info-text">Mainkan berbagai mini games yang menantang dan dapatkan hadiah menarik!</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="info-title">Berteman</h3>
+                <p class="info-text">Bergabung dengan komunitas, berteman, dan kunjungi rumah teman-temanmu!</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3 class="info-title">Hadiah Harian</h3>
+                <p class="info-text">Dapatkan hadiah spesial setiap hari dengan login dan menyelesaikan misi!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Pink Paradise. Semua hak dilindungi.</p>
+            <p>Dibuat dengan <i class="fas fa-heart" style="color: var(--light-pink);"></i> untuk anak perempuan di seluruh dunia</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Character Card Interaction
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Create a simple modal-like effect
+                const characterName = this.querySelector('.character-name').textContent;
+                const characterType = this.querySelector('.character-type').textContent;
+                const characterImage = this.querySelector('img').src;
+                
+                // Create popup
+                const popup = document.createElement('div');
+                popup.style.position = 'fixed';
+                popup.style.top = '0';
+                popup.style.left = '0';
+                popup.style.width = '100%';
+                popup.style.height = '100%';
+                popup.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                popup.style.display = 'flex';
+                popup.style.justifyContent = 'center';
+                popup.style.alignItems = 'center';
+                popup.style.zIndex = '1000';
+                
+                const popupContent = document.createElement('div');
+                popupContent.style.backgroundColor = 'white';
+                popupContent.style.borderRadius = '20px';
+                popupContent.style.padding = '30px';
+                popupContent.style.maxWidth = '500px';
+                popupContent.style.textAlign = 'center';
+                popupContent.style.position = 'relative';
+                
+                popupContent.innerHTML = `
+                    <button style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--purple);">×</button>
+                    <img src="${characterImage}" alt="${characterName}" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+                    <h2 style="color: var(--purple); margin-bottom: 10px;">${characterName}</h2>
+                    <p style="color: #888; margin-bottom: 20px;">${characterType}</p>
+                    <p style="color: #666; margin-bottom: 20px;">${characterName} adalah karakter yang sangat menyenangkan dengan kepribadian yang ceria. Dia suka bermain dengan teman-temannya dan menjelajahi dunia Pink Paradise!</p>
+                    <button class="play-btn" style="padding: 10px 20px; font-size: 1rem;">Pilih Karakter Ini</button>
+                `;
+                
+                popup.appendChild(popupContent);
+                document.body.appendChild(popup);
+                
+                // Close popup when clicking the close button
+                popupContent.querySelector('button').addEventListener('click', function() {
+                    document.body.removeChild(popup);
+                });
+                
+                // Close popup when clicking outside
+                popup.addEventListener('click', function(e) {
+                    if (e.target === popup) {
+                        document.body.removeChild(popup);
+                    }
+                });
+            });
+        });
+
+        // Add more floating elements dynamically
+        function createFloatingElement() {
+            const element = document.createElement('div');
+            element.classList.add('floating');
+            
+            // Randomly choose between heart and star
+            if (Math.random() > 0.5) {
+                element.classList.add('floating-heart');
+                element.innerHTML = '<i class="fas fa-heart"></i>';
+            } else {
+                element.classList.add('floating-star');
+                element.innerHTML = '<i class="fas fa-star"></i>';
+            }
+            
+            // Random position
+            element.style.left = Math.random() * 100 + '%';
+            element.style.animationDelay = Math.random() * 5 + 's';
+            element.style.animationDuration = (15 + Math.random() * 10) + 's';
+            
+            document.body.appendChild(element);
+            
+            // Remove element after animation completes
+            setTimeout(() => {
+                document.body.removeChild(element);
+            }, 25000);
+        }
+        
+        // Create new floating elements periodically
+        setInterval(createFloatingElement, 3000);
+    </script>
+</body>
+</html>
